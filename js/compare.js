@@ -1,12 +1,20 @@
-
 //car
 let carArr = [];
 
 class Car {
    
-
     constructor(nome, preco, alturaCacamba, alturaVeiculo, alturaSolo, capacidadeCarga, motor, potencia, volumeCacamba, roda, image){
-       
+       this.nome = nome;
+       this.preco = preco;
+       this.alturaCacamba = alturaCacamba;
+       this.alturaVeiculo = alturaVeiculo;
+       this.alturaSolo = alturaSolo;
+       this.capacidadeCarga = capacidadeCarga;
+       this.motor = motor;
+       this.potencia = potencia;
+       this.volumeCacamba = volumeCacamba;
+       this.roda = roda;
+       this.image = image;
     }
 } 
 
@@ -21,16 +29,21 @@ function GetCarArrPosition(arr, carClass) {
 
 function SetCarToCompare(el, carClass) {
    
-    if(carClass instanceof Car){       
-        if(el.checked){
-                
-            
-        } else {
-          
-        } 
-    } else {
-        throw "You need set a Car Class";
+    if(el.checked && carArr.length>=2){
+        alert("Tu só me pode marcar 2 carros ao mesmo tempo");
+        el.checked = false;
+        return;
     }
+
+    if(el.checked){
+        carArr.push(carClass);
+    }else{
+        const index = GetCarArrPosition(carArr,carClass);
+        if(index!==-1){
+            carArr.splice(index,1);
+        }
+    }
+    
 }
 
 function ShowCompare() {
@@ -48,5 +61,37 @@ function HideCompare(){
 }
 
 function UpdateCompareTable() {
-    
+
+    const compare0 = carArr[0];
+    const compare1 = carArr[1];
+
+    document.querySelector("#compare_image_0").innerHTML = `<img src="${compare0.image}">`;
+    document.querySelector("#compare_image_1").innerHTML = `<img src="${compare1.image}">`;
+
+    document.querySelector("#compare_modelo_0").innerHTML = compare0.nome;
+    document.querySelector("#compare_modelo_1").innerHTML = compare1.nome;
+
+    document.querySelector("#compare_alturacacamba_0").innerHTML =compare0.alturaCacamba;
+    document.querySelector("#compare_alturacacamba_1").innerHTML =compare1.alturaCacamba;
+    document.querySelector("#compare_alturaveiculo_0").innerHTML =compare0.alturaVeiculo;
+    document.querySelector("#compare_alturaveiculo_1").innerHTML =compare1.alturaVeiculo;
+    document.querySelector("#compare_alturasolo_0").innerHTML =compare0.alturaSolo;
+    document.querySelector("#compare_alturasolo_1").innerHTML =compare1.alturaSolo;
+    document.querySelector("#compare_capacidadecarga_0").innerHTML =compare0.capacidadeCarga;
+    document.querySelector("#compare_capacidadecarga_1").innerHTML =compare1.capacidadeCarga;
+    document.querySelector("#compare_motor_0").innerHTML =compare0.motor;
+    document.querySelector("#compare_motor_1").innerHTML =compare1.motor;
+    document.querySelector("#compare_potencia_0").innerHTML =compare0.potencia;
+    document.querySelector("#compare_potencia_1").innerHTML =compare1.potencia;
+    document.querySelector("#compare_volumecacamba_0").innerHTML =compare0.volumeCacamba;
+    document.querySelector("#compare_volumecacamba_1").innerHTML =compare1.volumeCacamba;
+    document.querySelector("#compare_roda_0").innerHTML =compare0.roda;
+    document.querySelector("#compare_roda_1").innerHTML =compare1.roda;
+    document.querySelector("#compare_preco_0").innerHTML =compare0.preco;
+    document.querySelector("#compare_preco_1").innerHTML =compare1.preco;
+
+
+
+
+
 }
