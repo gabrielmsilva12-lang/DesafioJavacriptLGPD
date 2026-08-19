@@ -47,8 +47,12 @@ window.onload = function() {
         return;
     }
 
-    caixa1.addEventListener("change", function() {
-        botao.disabled = !caixa1.checked;
+    // Mostrar alerta ao clicar no botão se os termos não estiverem aceitos
+    botao.addEventListener("click", function(event) {
+        if (!caixa1.checked) {
+            alert("Para enviar seus dados, você precisa aceitar os termos e condições.");
+            event.preventDefault();
+        }
     });
 
     form.addEventListener("submit", function(event) {
@@ -69,7 +73,6 @@ window.onload = function() {
         }
 
         form.reset();
-        botao.disabled = true;
         caixa1.checked = false;
     });
 };
